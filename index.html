@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API</title>
+</head>
+<body>
+    <form>
+        <b>Have: </b><input type="text" id="have"><br>
+        <b>Want: </b><input type="text" id="want"><br>
+        <b>Amount: </b><input type="number" id="amount"><br>
+        <button value="result" id="result">convert currency</button>
+    </form>
+    <hr>
+    <h1>New Amount: </h1>
+    <h3 id="new_amount"></h3>
+    <h1>Old Amount: </h1>
+    <h3 id="old_amount"></h3>
+    
+    <script>
+        const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '4fc77a372bmshedf76654537a91cp1b8cd3jsnb7fa9a817550',
+		'X-RapidAPI-Host': 'currency-converter-by-api-ninjas.p.rapidapi.com'
+	}
+};
+
+    const convertcurrency=(have,want,amount)=>{
+      fetch(  'https://currency-converter-by-api-ninjas.p.rapidapi.com/v1/convertcurrency?have='+have+'&want='+want+'&amount='+amount ,options)
+      .then(response=>response.json())
+      .then(data=>{console.log(data)
+    new_amount.innerHTML=data.new_amount;
+    old_amount.innerHTML=data.old_amount;
+    }
+      )
+    }
+    result.addEventListener("click",(e)=>{
+        e.preventDefault()
+        convertcurrency(have.value,want.value,amount.value)
+    });
+
+
+    </script>
+</body>
+</html>
